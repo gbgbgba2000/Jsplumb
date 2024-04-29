@@ -1,0 +1,81 @@
+10. 自動排列節點
+標題：自動排列節點
+這個範例演示了如何使用 jsPlumb 自動排列節點，以形成更整齊的連接圖形。
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Automatic Node Arrangement Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/js/jsplumb.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/css/jsplumbtoolkit-defaults.css" />
+    <style>
+        .element {
+            width: 100px;
+            height: 100px;
+            background-color: #f77;
+            margin: 10px;
+            position: absolute; /* 將元素定位到容器中 */
+        }
+    </style>
+</head>
+<body>
+    <div id="container" style="position: relative;"></div> <!-- 將容器設置為相對定位 -->
+    <button id="arrangeBtn">自動排列</button>
+
+    <script>
+        jsPlumb.ready(function() {
+            var common = {
+                isSource: true,
+                isTarget: true,
+                connector: 'Straight',
+                endpoint: 'Dot',
+                paintStyle: {
+                    fill: 'white',
+                    outlineStroke: 'blue',
+                    strokeWidth: 3
+                },
+                hoverPaintStyle: {
+                    outlineStroke: 'lightblue'
+                },
+                connectorStyle: {
+                    outlineStroke: 'green',
+                    strokeWidth: 1
+                },
+                connectorHoverStyle: {
+                    strokeWidth: 2
+                }
+            };
+
+            jsPlumb.setContainer('container');
+
+            var nodes = [];
+            for (var i = 1; i <= 6; i++) {
+                var newNodeId = "element" + i;
+                var newNode = document.createElement("div");
+                newNode.id = newNodeId;
+                newNode.classList.add("element");
+                newNode.innerText = "節點" + i;
+                newNode.style.left = (i * 120) + "px"; // 將節點水平排列
+                newNode.style.top = "50px"; // 將節點垂直居中
+                document.getElementById("container").appendChild(newNode);
+                jsPlumb.draggable(newNodeId);
+                jsPlumb.addEndpoint(newNodeId, { anchor: 'Right' }, common);
+                nodes.push(newNodeId);
+            }
+
+            function arrangeNodes() {
+                jsPlumb.repaintEverything(); // 重新繪製以避免錯誤排列
+                jsPlumb.setSuspendDrawing(true); // 暫停繪製以提高性能
+                for (var i = 0; i < nodes.length; i++) {
+                    var node = document.getElementById(nodes[i]);
+                    node.style.left = (i * 120) + "px";
+                    node.style.top = "50px";
+                }
+                jsPlumb.setSuspendDrawing(false, true); // 恢復繪製
+            }
+
+            document.getElementById("arrangeBtn").addEventListener("click", arrangeNodes);
+        });
+    </script>
+</body>
+</html>
