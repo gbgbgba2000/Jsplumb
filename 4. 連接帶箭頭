@@ -1,0 +1,47 @@
+4. 連接帶箭頭
+標題：建立帶箭頭的連接
+這個範例展示了如何建立一個帶箭頭的連接。連接的樣式被指定為貝茲曲線，並且在連接的終點處添加了一個箭頭。箭頭的位置設置為 1，表示它位於連接的終點
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Connection with Arrow Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/js/jsplumb.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/css/jsplumbtoolkit-defaults.css" />
+    <style>
+        .element1 {
+            width: 50px;
+            height: 50px;
+            background-color: #f77;
+            float: left;
+            margin-right: 50px;
+        }
+
+        .element2 {
+            width: 50px;
+            height: 50px;
+            background-color: #77f;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div id="element1" class="element1"></div>
+    <div id="element2" class="element2"></div>
+
+    <script>
+        jsPlumb.ready(function() {
+            jsPlumb.connect({
+                source: "element1",
+                target: "element2",
+                anchors: ["Right", "Left"],
+                endpoint: "Dot",
+                connector: ["Bezier", { curviness: 70 }],
+                overlays: [
+                    ["Arrow", { location: 1, width: 10, length: 10 }]
+                ]
+            });
+        });
+    </script>
+</body>
+</html>
