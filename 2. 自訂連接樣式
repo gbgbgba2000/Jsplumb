@@ -1,0 +1,44 @@
+2. 自訂連接樣式
+標題：自訂連接的樣式
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Connection Style</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/js/jsplumb.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/css/jsplumbtoolkit-defaults.css" />
+    <style>
+        .element1 {
+            width: 50px;
+            height: 50px;
+            background-color: #f77;
+            float: left;
+            margin-right: 50px;
+        }
+
+        .element2 {
+            width: 50px;
+            height: 50px;
+            background-color: #77f;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div id="element1" class="element1"></div>
+    <div id="element2" class="element2"></div>
+
+    <script>
+        jsPlumb.ready(function() {
+            jsPlumb.connect({
+                source: "element1",
+                target: "element2",
+                anchors: ["Right", "Left"],
+                endpoint: "Dot",
+                paintStyle: { stroke: "#333", strokeWidth: 2 },
+                hoverPaintStyle: { stroke: "#ff0000" }
+            });
+        });
+    </script>
+</body>
+</html>
