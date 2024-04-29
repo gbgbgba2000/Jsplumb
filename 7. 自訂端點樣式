@@ -1,0 +1,83 @@
+7. 自訂端點樣式
+標題：使用自訂端點樣式
+把端點改成正方形且中空的樣式
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Endpoint Style Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/js/jsplumb.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/css/jsplumbtoolkit-defaults.css" />
+    <style>
+        #diagramContainer {
+            width: 400px;
+            height: 200px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+        
+        .item {
+            width: 50px;
+            height: 50px;
+            background-color: #f77;
+            position: absolute;
+        }
+        
+        .custom-endpoint {
+            width: 20px;
+            height: 20px;
+            background-color: #777;
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="diagramContainer">
+        <div id="item_left" class="item" style="left: 50px; top: 50px;"></div>
+        <div id="item_right" class="item" style="left: 250px; top: 50px;"></div>
+    </div>
+
+    <script>
+        jsPlumb.ready(function() {
+            jsPlumb.setContainer('diagramContainer')
+
+            var common = {
+                isSource: true,
+                isTarget: true,
+                connector: 'Straight',
+                endpoint: 'Dot',
+                paintStyle: {
+                    fill: 'white',
+                    outlineStroke: 'blue',
+                    strokeWidth: 3
+                },
+                hoverPaintStyle: {
+                    outlineStroke: 'lightblue'
+                },
+                connectorStyle: {
+                    outlineStroke: 'green',
+                    strokeWidth: 1
+                },
+                connectorHoverStyle: {
+                    strokeWidth: 2
+                }
+            }
+
+            jsPlumb.addEndpoint('item_left', {
+                anchors: ['Right'],
+                endpoint: ['Dot', { cssClass: 'custom-endpoint' }]
+            }, common)
+
+            jsPlumb.addEndpoint('item_right', {
+                anchor: 'Left',
+                endpoint: ['Dot', { cssClass: 'custom-endpoint' }]
+            }, common)
+
+            jsPlumb.addEndpoint('item_right', {
+                anchor: 'Right',
+                endpoint: ['Dot', { cssClass: 'custom-endpoint' }]
+            }, common)
+        })
+    </script>
+</body>
+</html>
