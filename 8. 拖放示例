@@ -1,0 +1,72 @@
+8. 拖放示例
+標題：拖放示例
+這個範例演示了如何使用 jsPlumb 在端點之間建立拖放功能和連接。
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Drag and Drop Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/js/jsplumb.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/css/jsplumbtoolkit-defaults.css" />
+    <style>
+        .element1 {
+            width: 100px;
+            height: 100px;
+            background-color: #f77;
+            margin: 10px;
+        }
+        .element2 {
+            width: 100px;
+            height: 100px;
+            background-color: #7f7;
+            margin: 10px;
+        }
+        .element3 {
+            width: 100px;
+            height: 100px;
+            background-color: #77f;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="element1" class="element1"></div>
+    <div id="element2" class="element2"></div>
+    <div id="element3" class="element3"></div>
+
+    <script>
+        jsPlumb.ready(function() {
+            var common = {
+                isSource: true,
+                isTarget: true,
+                connector: 'Straight',
+                endpoint: 'Dot',
+                paintStyle: {
+                    fill: 'white',
+                    outlineStroke: 'blue',
+                    strokeWidth: 3
+                },
+                hoverPaintStyle: {
+                    outlineStroke: 'lightblue'
+                },
+                connectorStyle: {
+                    outlineStroke: 'green',
+                    strokeWidth: 1
+                },
+                connectorHoverStyle: {
+                    strokeWidth: 2
+                }
+            };
+
+            jsPlumb.draggable("element1");
+            jsPlumb.draggable("element2");
+            jsPlumb.draggable("element3");
+
+            jsPlumb.addEndpoint('element1', { anchor: 'Right' }, common);
+            jsPlumb.addEndpoint('element2', { anchor: 'Right' }, common);
+            jsPlumb.addEndpoint('element3', { anchor: 'Right' }, common);
+        });
+    </script>
+</body>
+</html>
