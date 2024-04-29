@@ -1,0 +1,46 @@
+3. 刪除連接
+標題：點擊端點時，允許刪除連接
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deleteable Connections Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/js/jsplumb.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/css/jsplumbtoolkit-defaults.css" />
+    <style>
+        .element1 {
+            width: 50px;
+            height: 50px;
+            background-color: #f77;
+            float: left;
+            margin-right: 50px;
+        }
+
+        .element2 {
+            width: 50px;
+            height: 50px;
+            background-color: #77f;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div id="element1" class="element1"></div>
+    <div id="element2" class="element2"></div>
+
+    <script>
+        jsPlumb.ready(function() {
+            var connection = jsPlumb.connect({
+                source: "element1",
+                target: "element2",
+                anchors: ["Right", "Left"],
+                endpoint: "Dot"
+            });
+
+            connection.bind("click", function () {
+                jsPlumb.deleteConnection(connection);
+            });
+        });
+    </script>
+</body>
+</html>
