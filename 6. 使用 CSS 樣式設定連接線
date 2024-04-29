@@ -1,0 +1,51 @@
+6. 使用 CSS 樣式設定連接線
+標題：自定義連接線樣式
+這個範例展示了如何使用 CSS 樣式來自定義連接線的外觀。我們創建了兩個節點，並將它們連接起來。在連接的過程中，我們指定了連接線的寬度、顏色，且連線樣式為虛線和箭頭樣式，並且使用 CSS 類 custom-connection 來設置連接線的邊框樣式。
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customize Connection Line Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/js/jsplumb.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/css/jsplumbtoolkit-defaults.css" />
+    <style>
+        .element {
+            width: 50px;
+            height: 50px;
+            background-color: #f77;
+            float: left;
+            margin-right: 50px;
+        }
+        
+        .custom-connection {
+            border: 2px dashed #777;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="element1" class="element"></div>
+    <div id="element2" class="element"></div>
+
+    <script>
+        jsPlumb.ready(function() {
+            jsPlumb.connect({
+                source: "element1",
+                target: "element2",
+                endpoint: "Dot",
+                anchor: ["Right", "Left"],
+                paintStyle: { stroke: "#777", strokeWidth: 2 },
+                overlays: [
+                    ["PlainArrow", { location: 1, width: 10, length: 10, foldback: 0.8 }]
+                ],
+                connector: "Straight",
+                cssClass: "custom-connection"
+            });
+
+            jsPlumb.draggable("element1");
+            jsPlumb.draggable("element2");
+        });
+    </script>
+</body>
+</html>
+
