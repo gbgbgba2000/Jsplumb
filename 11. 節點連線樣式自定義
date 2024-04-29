@@ -1,0 +1,60 @@
+11. 節點連線樣式自定義
+標題：節點連線樣式自定義
+這個範例演示了如何使用 jsPlumb 自定義節點之間的連線樣式。
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Node Connection Styles Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/js/jsplumb.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/css/jsplumbtoolkit-defaults.css" />
+    <style>
+        .element {
+            width: 100px;
+            height: 100px;
+            background-color: #f77;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="node1" class="element">節點1</div>
+        <div id="node2" class="element">節點2</div>
+    </div>
+
+    <script>
+        jsPlumb.ready(function() {
+            var common = {
+                isSource: true,
+                isTarget: true,
+                connector: 'Straight',
+                endpoint: 'Dot',
+                paintStyle: {
+                    stroke: 'green',
+                    strokeWidth: 3
+                },
+                hoverPaintStyle: {
+                    stroke: 'red',
+                    strokeWidth: 4
+                },
+                connectorStyle: {
+                    stroke: 'blue',
+                    strokeWidth: 2
+                },
+                connectorHoverStyle: {
+                    stroke: 'orange',
+                    strokeWidth: 4
+                }
+            };
+
+            jsPlumb.setContainer('container');
+
+            jsPlumb.addEndpoint('node1', { anchor: 'Right' }, common);
+            jsPlumb.addEndpoint('node2', { anchor: 'Left' }, common);
+
+            jsPlumb.connect({ source: 'node1', target: 'node2' });
+        });
+    </script>
+</body>
+</html>
