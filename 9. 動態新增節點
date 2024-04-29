@@ -1,0 +1,66 @@
+9. 動態新增節點
+標題：動態新增節點
+這個範例演示了如何使用 jsPlumb 動態新增節點，並且在新增節點後重新連接。
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Node Addition Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/js/jsplumb.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/css/jsplumbtoolkit-defaults.css" />
+    <style>
+        .element {
+            width: 100px;
+            height: 100px;
+            background-color: #f77;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <button id="addNodeBtn">新增節點</button>
+
+    <script>
+        jsPlumb.ready(function() {
+            var common = {
+                isSource: true,
+                isTarget: true,
+                connector: 'Straight',
+                endpoint: 'Dot',
+                paintStyle: {
+                    fill: 'white',
+                    outlineStroke: 'blue',
+                    strokeWidth: 3
+                },
+                hoverPaintStyle: {
+                    outlineStroke: 'lightblue'
+                },
+                connectorStyle: {
+                    outlineStroke: 'green',
+                    strokeWidth: 1
+                },
+                connectorHoverStyle: {
+                    strokeWidth: 2
+                }
+            };
+
+            jsPlumb.setContainer('container');
+
+            function addNode() {
+                var newNodeId = "element" + (document.querySelectorAll(".element").length + 1);
+                var newNode = document.createElement("div");
+                newNode.id = newNodeId;
+                newNode.classList.add("element");
+                newNode.innerText = "節點" + (document.querySelectorAll(".element").length + 1);
+                document.getElementById("container").appendChild(newNode);
+
+                jsPlumb.draggable(newNodeId);
+                jsPlumb.addEndpoint(newNodeId, { anchor: 'Right' }, common);
+            }
+
+            document.getElementById("addNodeBtn").addEventListener("click", addNode);
+        });
+    </script>
+</body>
+</html>
