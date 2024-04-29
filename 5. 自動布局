@@ -1,0 +1,49 @@
+5. 自動布局
+標題：使用自動布局
+這個範例展示了如何使用自動布局來建立連接。我們創建了三個端點，然後將它們連接起來，並且使每個節點都可以被拖動。JsPlumb 會根據我們定義的連接自動排列端點，以避免端點重疊。
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Automatic Layout Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/js/jsplumb.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/css/jsplumbtoolkit-defaults.css" />
+    <style>
+        .element {
+            width: 50px;
+            height: 50px;
+            background-color: #f77;
+            float: left;
+            margin-right: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="element1" class="element"></div>
+    <div id="element2" class="element"></div>
+    <div id="element3" class="element"></div>
+
+    <script>
+        jsPlumb.ready(function() {
+            jsPlumb.connect({
+                source: "element1",
+                target: "element2",
+                endpoint: "Dot"
+            });
+
+            jsPlumb.connect({
+                source: "element1",
+                target: "element3",
+                endpoint: "Dot"
+            });
+
+            jsPlumb.draggable("element1");
+            jsPlumb.draggable("element2");
+            jsPlumb.draggable("element3");
+
+            jsPlumb.setContainer(document.body);
+            jsPlumb.repaintEverything();
+        });
+    </script>
+</body>
+</html>
