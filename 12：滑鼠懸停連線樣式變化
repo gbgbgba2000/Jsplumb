@@ -1,0 +1,61 @@
+12：滑鼠懸停連線樣式變化
+標題：滑鼠懸停連線樣式變化
+使用 hoverPaintStyle 屬性來定義滑鼠懸停時連線的樣式。当滑鼠懸停在連線上時，連線的顏色會變成紅色，以突顯連線。
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mouse Hover Connection Style Change Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/js/jsplumb.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.14.6/css/jsplumbtoolkit-defaults.css" />
+    <style>
+        .element {
+            width: 100px;
+            height: 100px;
+            background-color: #f77;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="node1" class="element">節點1</div>
+        <div id="node2" class="element">節點2</div>
+    </div>
+
+    <script>
+        jsPlumb.ready(function() {
+            var common = {
+                isSource: true,
+                isTarget: true,
+                connector: 'Straight',
+                endpoint: 'Dot',
+                paintStyle: {
+                    stroke: 'green',
+                    strokeWidth: 3
+                },
+                hoverPaintStyle: {
+                    stroke: 'red',
+                    strokeWidth: 4
+                }
+            };
+
+            jsPlumb.setContainer('container');
+
+            var connection = jsPlumb.connect({
+                source: 'node1',
+                target: 'node2',
+                anchors: ['Right', 'Left'],
+                paintStyle: {
+                    stroke: 'green',
+                    strokeWidth: 3
+                },
+                hoverPaintStyle: {
+                    stroke: 'red',
+                    strokeWidth: 4
+                }
+            });
+        });
+    </script>
+</body>
+</html>
